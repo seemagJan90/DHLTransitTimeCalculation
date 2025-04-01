@@ -6,7 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -48,22 +47,16 @@ public class TransitTimeCalculatorPage {
 	/**
 	 * WebElement for clicking the Calculate button.
 	 */
-	@FindBy(css = "#wcag-main-content > div.l-grid.c-calculator.c-leadtime.js--swe-leadtime.component-wide.component-margin > div.c-leadtime--countryselector-container.js--freightcalc--countryselector-container.c-calculator--tabcontent.l-grid.l-grid--left-s.l-grid--w-100pc-s > div.c-calculator--input-form.c-calculator--padding-vertical.l-grid.l-grid--w-100pc-s.l-grid--center-s.l-grid--center-m > div.l-grid--center-s.l-grid.l-grid--w-90pc-s.l-grid--w-33pc-m > button")
+	@FindBy(css = "button.js--freightcalc-se--input-submit.c-swe-leadtime-button")
 	private WebElement calculateButton;
 
 	/**
 	 * WebElement for error message when invalid input is provided.
 	 */
-	@FindBy(css = "#wcag-main-content > div.l-grid.c-calculator.c-leadtime.js--swe-leadtime.component-wide.component-margin > div.c-leadtime--countryselector-container.js--freightcalc--countryselector-container.c-calculator--tabcontent.l-grid.l-grid--left-s.l-grid--w-100pc-s > div.c-calculator--input-form.c-calculator--padding-vertical.l-grid.l-grid--w-100pc-s.l-grid--center-s.l-grid--center-m > div:nth-child(1) > div:nth-child(2) > p") // Replace
-																																																																																																															// with
-																																																																																																															// actual
-																																																																																																															// locator
+	@FindBy(css = "p.js--origin-zip-error.c-calculator--zip-error-message")
 	private WebElement errorMessageOriginPostcode;
 
-	@FindBy(css = "#wcag-main-content > div.l-grid.c-calculator.c-leadtime.js--swe-leadtime.component-wide.component-margin > div.c-leadtime--countryselector-container.js--freightcalc--countryselector-container.c-calculator--tabcontent.l-grid.l-grid--left-s.l-grid--w-100pc-s > div.c-calculator--input-form.c-calculator--padding-vertical.l-grid.l-grid--w-100pc-s.l-grid--center-s.l-grid--center-m > div:nth-child(2) > div:nth-child(2) > p") // Replace
-																																																																																																															// with
-																																																																																																															// actual
-																																																																																																															// locator
+	@FindBy(css = "p.js--destination-zip-error.c-calculator--zip-error-message")
 	private WebElement errorMessageDestinationPostcode;
 
 	@FindBy(id = "onetrust-accept-btn-handler")
@@ -72,7 +65,7 @@ public class TransitTimeCalculatorPage {
 	/**
 	 * WebElement for verifying if results are displayed.
 	 */
-	@FindBy(css = "#wcag-main-content > div.l-grid.c-calculator.c-leadtime.js--swe-leadtime.component-wide.component-margin > div.c-leadtime--options-container.js--leadtime--options-container.l-grid.l-grid--left-s.l-grid--w-100pc-s.l-grid--w-100pc-m > div.l-grid.l-grid--left-s.l-grid--w-100pc-s.c-calculator--padding-vertical > div.l-grid--w-50pc-s.l-grid--left-s > h3")
+	@FindBy(css = " #wcag-main-content .c-leadtime--options-container.js--leadtime--options-container  h3")
 	private WebElement transitTimeResult;
 
 	WebDriverWait wait;
@@ -149,6 +142,7 @@ public class TransitTimeCalculatorPage {
 	 * @return error message if an error message is displayed, false null
 	 */
 	public String getOriginPostcodeErrorMessage() {
+		wait.until(ExpectedConditions.visibilityOf(errorMessageOriginPostcode));
 		return errorMessageOriginPostcode.isDisplayed() ? errorMessageOriginPostcode.getText() : null;
 	}
 
@@ -158,6 +152,7 @@ public class TransitTimeCalculatorPage {
 	 * @return error message if an error message is displayed, false null
 	 */
 	public String getDestinationPostcodeErrorMessage() {
+		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#wcag-main-content > div.l-grid.c-calculator.c-leadtime.js--swe-leadtime.component-wide.component-margin > div.c-leadtime--countryselector-container.js--freightcalc--countryselector-container.c-calculator--tabcontent.l-grid.l-grid--left-s.l-grid--w-100pc-s > div.c-calculator--input-form.c-calculator--padding-vertical.l-grid.l-grid--w-100pc-s.l-grid--center-s.l-grid--center-m > div:nth-child(2) > div:nth-child(2) > p"))).click();
 		return errorMessageDestinationPostcode.isDisplayed() ? errorMessageDestinationPostcode.getText() : null;
 	}
 

@@ -37,9 +37,10 @@ public class InvalidInputTest extends BaseTest {
 
 	/**
 	 * Test method to verify handling of invalid postal codes
+	 * @throws InterruptedException 
 	 */
 	@Test
-	public void testInvalidPostalCode() {
+	public void testInvalidPostalCode() throws InterruptedException {
 		//calculatorPage.acceptCookies();
 		calculatorPage.selectOriginCountry("Sweden");
 		calculatorPage.enterOriginPostalCode("10012");
@@ -48,7 +49,7 @@ public class InvalidInputTest extends BaseTest {
 		calculatorPage.enterDestinationPostalCode("10115");
 
 		calculatorPage.clickCalculate();
-
+		Thread.sleep(2000);
 		String destinationPostcodeErrorText = calculatorPage.getDestinationPostcodeErrorMessage();
 		Assert.assertNotNull(destinationPostcodeErrorText, "Correct postal code (e.g. no post box)*");
 		Assert.assertEquals(destinationPostcodeErrorText, "Correct postal code (e.g. no post box)*");
