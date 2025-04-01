@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="DHL Test Suite" verbose="1">
+    <test name="DHL Transit Time Test">
+        <classes>
+           <class name="tests.InvalidInputTest"/>
+			<class name="tests.ValidInputTest"/>
+        </classes>
+    </test>
+</suite>
